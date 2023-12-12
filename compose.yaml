@@ -7,6 +7,8 @@ services:
     ports:
      - '4040:4040'
     working_dir: /home/node/app
+    networks:
+      - front-tier
     volumes:
       - ./src:/home/node/app
     environment:
@@ -34,12 +36,31 @@ services:
 
   grafana:
     image: grafana/grafana-enterprise
+    depends_on:
+      - prometheus
     ports: 
       - 3000:3000
+    networks:
+      - back-tier
+      - front-tier
     volumes:
       - grafana-storage:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
     restart: always
 
-volumes:
-  grafana-storage: {} # Anonymus volume
+  prometheus:
+    image: bitnami/prometheus
+    ports: 
+      - 9090:9090
+    volumes:
+      - prometheus-storage:/prometheus
+    networks:
+      - back-tier
 
+volumes:
+  grafana-storage: {}
+  prometheus-storage: {}
+
+networks:
+  front-tier:
+  back-tier:
