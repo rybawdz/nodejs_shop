@@ -1,0 +1,14 @@
+services:
+  server:
+    build:
+      context: ./dockerfiles
+      dockerfile: 'node.dockerfile'
+    ports:
+     - '3000:3000'
+    working_dir: /home/node/app
+    volumes:
+      - ./src:/home/node/app
+    environment:
+      - NODE_ENV=production
+    command: npm start
+

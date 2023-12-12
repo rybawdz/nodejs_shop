@@ -1,4 +1,8 @@
 # nodejs_shop
 Project for university course - WEPPO.
 
-Test
+Database - MongoDB
+Admin interface - Mongo Express
+Monitoring - Grafana
+
+Maybe use vault for secrets?
