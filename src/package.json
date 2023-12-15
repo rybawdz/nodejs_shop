@@ -1,7 +1,20 @@
 {
 
     "scripts": {
-      "start": "node app.js"
+
+        "start": "node app.js"
+
+    },
+
+    "dependencies": {
+
+        "colors": "^1.4.0",
+
+        "prom-client": "^15.0.0",
+
+        "winston": "^3.11.0"
+
     }
-    
-  }
+
+}
+

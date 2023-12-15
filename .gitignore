@@ -1,0 +1,5 @@
+# Ignore Node.js dependencies
+src/node_modules/
+
+# Ignore npm lock file
+src/package-lock.json
