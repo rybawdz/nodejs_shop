@@ -9,6 +9,7 @@ services:
     working_dir: /home/node/app
     networks:
       - front-tier
+      - monitoring
     volumes:
       - ./src:/home/node/app
     environment:
@@ -41,7 +42,7 @@ services:
     ports: 
       - 3000:3000
     networks:
-      - back-tier
+      - monitoring
       - front-tier
     volumes:
       - grafana-storage:/var/lib/grafana
@@ -54,8 +55,15 @@ services:
       - 9090:9090
     volumes:
       - prometheus-storage:/prometheus
+      - ./prometheus/prometheus.yaml:/prometheus.yaml
     networks:
-      - back-tier
+      - monitoring
+    command: 
+      - '--config.file=/prometheus.yaml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+
 
 volumes:
   grafana-storage: {}
@@ -63,4 +71,5 @@ volumes:
 
 networks:
   front-tier:
-  back-tier:
+  monitoring:
+    driver: bridge
