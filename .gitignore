@@ -1,5 +1,5 @@
 # Ignore Node.js dependencies
-src/node_modules/
+src/server/node_modules/
 
 # Ignore npm lock file
-src/package-lock.json
+src/server/package-lock.json

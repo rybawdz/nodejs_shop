@@ -11,7 +11,7 @@ services:
       - front-tier
       - monitoring
     volumes:
-      - ./src:/home/node/app
+      - ./src/server:/home/node/app
     environment:
       - NODE_ENV=production
     command: npm start
