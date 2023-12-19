@@ -18,6 +18,20 @@ services:
     depends_on:
       - mongo
 
+  app:
+    build:
+      context: ./dockerfiles
+      dockerfile: 'app.dockerfile'
+    ports:
+      - '3000:3000'
+    working_dir: /home/frontend
+    networks:
+      - front-tier
+    volumes:
+      - ./src/shop-frontend:/home/frontend
+    depends_on:
+      - server
+    command: npm run dev
   mongo:
     image: mongo
     restart: always
@@ -40,7 +54,7 @@ services:
     depends_on:
       - prometheus
     ports: 
-      - 3000:3000
+      - 3050:3000
     networks:
       - monitoring
       - front-tier
