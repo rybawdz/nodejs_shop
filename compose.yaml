@@ -40,9 +40,9 @@ services:
     networks:
       - back-tier
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT:-mongodb}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-mongodb}
-      MONGO_INITDB_ROOT_DATABASE: ${MONGO_ROOT_DB:-mongodb}
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_DATABASE: admin
     volumes: 
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     
