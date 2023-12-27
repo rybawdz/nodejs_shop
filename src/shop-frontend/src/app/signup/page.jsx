@@ -1,22 +1,30 @@
 "use client";
 
+import signIn from "../scripts/signIn"
 import TextBox from "../components/textbox";
 import Button from "../components/button";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
-async function signUp(prevState, formData) {
-  var email = formData.get("email");
-  var password = formData.get("password");
-  var confirmpwd = formData.get("confirmpwd");
+async function register(prevState, formData) {
 
-  if (password != confirmpwd) {
-    return "Passwords do not match.";
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'PasswordMatch':
+          return 'Passwords do not match.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
   }
 }
 
 export default function Page() {
-  const [errorMessage, dispatch] = useFormState(signUp, undefined);
+  const [errorMessage, dispatch] = useFormState(register, undefined);
   const { pending } = useFormStatus();
   return (
     <div>
