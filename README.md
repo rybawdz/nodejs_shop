@@ -5,3 +5,5 @@ Database - MongoDB, Mongo Express
 Monitoring - Grafana, Prometheus
 Server - Nodejs
 Client - React/Nextjs, Tailwind CSS
+
+Maybe some logs - graylog

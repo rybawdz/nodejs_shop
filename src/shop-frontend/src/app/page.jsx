@@ -8,6 +8,7 @@ function Home() {
     <div>
     <h1>Hello, home page!</h1>
     <Button text="log in" action={() => router.push("/login")}/> 
+    <Button text="sign up" action={() => router.push("/signup")}/> 
     </div>
   );
 }
