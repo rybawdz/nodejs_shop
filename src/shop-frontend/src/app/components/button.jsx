@@ -1,10 +1,10 @@
 'use client'
 import { useRouter } from 'next/navigation'
 
-
-function Button({ text, url}) {
+function Button({placeholder, text, action, type}) {
   const router = useRouter()
-  return <button onClick={url ? () => router.push(url): () => null}>{text}</button>;
+  var typeVal = type ? type : 'button'
+  return <button placeholder={placeholder} type={typeVal} onClick={action ? action : () => null}>{text}</button>;
 }
 
 export default Button;

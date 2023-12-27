@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-function textBox({defaultText}){
-
+function TextBox({ defaultText, type, name }) {
+  return <input type={type} name={name} value={defaultText} required></input>;
 }
 
-export default textBox;
+export default TextBox;
