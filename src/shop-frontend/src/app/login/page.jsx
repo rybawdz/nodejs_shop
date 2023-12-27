@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <div>
     <h1>Hello, login page!</h1>
-    <Button text="button"/> 
+    <Button text="submit"/> 
     </div>
 
   );
