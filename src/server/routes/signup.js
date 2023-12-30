@@ -1,0 +1,1 @@
+const SignupModel = require("../models/signup.model");
