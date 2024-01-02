@@ -2,6 +2,8 @@
 print('Start ###################################################################################################################################################################################################' );
 var db = db.getSiblingDB('admin');
 var authResult = db.auth('root', 'example');
+
+db = db.getSiblingDB('ecommerce');
 db.createUser({
   user: 'euser',
   pwd: 'changesecret',
@@ -9,8 +11,6 @@ db.createUser({
     { role: 'readWrite', db: 'ecommerce' }
   ]
 });
-db = db.getSiblingDB('ecommerce');
-
 
 db.createCollection('users');
 db.createCollection('products');

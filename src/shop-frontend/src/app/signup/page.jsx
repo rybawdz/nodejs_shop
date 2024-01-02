@@ -1,6 +1,6 @@
 "use client";
 
-import signIn from "../scripts/signIn"
+import signIn from "../lib/signIn"
 import TextBox from "../components/textbox";
 import Button from "../components/button";
 import React from "react";

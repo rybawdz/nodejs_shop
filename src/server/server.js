@@ -33,7 +33,6 @@ const metricsMiddleware = promBundle({
 });
 
 app.use(express.json());
-app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(metricsMiddleware);
 const login = require('./routes/login');
@@ -47,8 +46,8 @@ const userDelete = require('./routes/userdelete');
 
 app.get('/', (req, res) => { res.send('Hello World'); })
 app.post('/api/v1/user', signup);
-/*app.post('/api/v1/user/login', login());
-app.post('/api/v1/user/logout', logout());
+app.post('/api/v1/user/login', login);
+/*app.post('/api/v1/user/logout', logout());
 app.get('/api/v1/user/:id', userInfo());
 app.put('/api/v1/user/:id', userUpdate());
 app.delete('/api/v1/user/:id', userDelete());
