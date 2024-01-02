@@ -6,7 +6,7 @@ const url = require('url')
 const promBundle = require("express-prom-bundle");
 const mongoose = require("mongoose");
 var app = express();
-const mongoString = "mongodb://root:example@mongo:27017/"
+const mongoString = "mongodb://euser:changesecret@mongo:27017/ecommerce"
 const database = mongoose.connection;
 
 function dbconnect() {
