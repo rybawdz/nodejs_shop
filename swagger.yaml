@@ -382,7 +382,7 @@ paths:
         description: Created user object
         required: true
   /user/login:
-    get:
+    post:
       tags:
         - user
       summary: Logs user into the system
@@ -424,7 +424,7 @@ paths:
         '400':
           description: Invalid username/password supplied
   /user/logout:
-    get:
+    post:
       tags:
         - user
       summary: Logs out current logged in user session
