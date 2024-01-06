@@ -3,11 +3,14 @@
     "scripts": {
 
         "start": "node app.js",
+
         "dev": "nodemon app.js"
 
     },
 
     "dependencies": {
+
+        "argon2": "^0.31.2",
 
         "colors": "^1.4.0",
 
