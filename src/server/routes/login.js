@@ -1,10 +1,11 @@
+const User = require("../models/user");
 module.exports = async function login(req, res) {
     if(!req.body.email || !req.body.password){
         res.status(400).json({message: 'Not enough information provided.'});
         return;  
     }
     try {
-        const hash = await argon2.hash(req.body.password);
+        var hash = await argon2.hash(req.body.password);
     } catch (err) {
         res.status(400).json({message: 'Password hashing error'});
     }

@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const logger = require('./logger');
 const colors = require('colors')
-const argon2 = require('argon2');
+const session = require('express-session')
 
 const url = require('url')
 const promBundle = require("express-prom-bundle");
@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 var app = express();
 const mongoString = "mongodb://euser:changesecret@mongo:27017/ecommerce"
 const database = mongoose.connection;
+
 
 const User = require("./models/user");
 
