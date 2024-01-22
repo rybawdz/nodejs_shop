@@ -10,7 +10,7 @@ function NavBar() {
     const subpages = {
         "Home": "/",
         "Profile": "/profile",
-        "Basket": "/basket"
+        "Contact": "/contact"
     };
 
     // handleClick function to handle click events and navigate
@@ -23,54 +23,34 @@ function NavBar() {
     var content = [];
     for (const key in subpages) {
         content.push(
-            <div key={key} className='subpageBox'>
-                <a href={subpages[key]} onClick={handleClick(subpages[key])}>{key}</a>
+            <div key={key} className='subpageBox' onClick={handleClick(subpages[key])}>
+                <p>{key}</p>
             </div>
         );
     }
 
     // Styles for NavBar
-    const navbarStyle = {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        width: "100%",
-        height: "150px",
-    };
-
-    navbarStyle.logoBox = {
-        outline: "2px solid blue",
-    };
-
-    navbarStyle.subpagesBox = {
-        display: "flex",
-        outline: "2px solid green",
-    };
-
-    navbarStyle.subpageBox = {
-        outline: "2px solid black",
-    };
-
-    navbarStyle.loginSignupBox = {
-        display: "flex",
-        outline: "2px solid red",
-    };
+    
 
     // Render NavBar component
     return (
-        <div className='navbarBox' style={navbarStyle}>
-            <div className='logoBox' style={navbarStyle.logoBox}>
+        <div className='navbarBox'>
+            <div className='logoBox'>
                 Logo
             </div>
-            <div className='subpagesBox' style={navbarStyle.subpagesBox}>
+            <div className='subpagesBox'>
                 {content}
             </div>
-            <div className="loginSignupBox" style={navbarStyle.loginSignupBox}>
+            <div className="loginSignupBox" onClick={handleClick("/login")}>
                 <div className="loginBox">
-                    <a href="/login" onClick={handleClick("/login")}>Log In</a>
+                    <p>
+                        Log In
+                    </p>
                 </div>
-                <div className="signupBox">
-                    <a href="/signup" onClick={handleClick("/signup")}>Sign Up</a>
+                <div className="signupBox" onClick={handleClick("/signup")}>
+                    <p>
+                        Sign Up
+                    </p>
                 </div>
             </div>
         </div>

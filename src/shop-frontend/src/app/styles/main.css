@@ -1,0 +1,75 @@
+:root {
+    --shrek-green-dark: #B0C400;
+    --shrek-green-light: #D5DE2E;
+    --shrek-brown-dark: #523213;
+    --shrek-brown-light: #795A2D;
+    --shrek-grey-dark: #C3BC95;
+    --shrek-grey-light: #D3CCA5;
+}
+
+body {
+    margin: 0px;
+    background-color: var(--shrek-grey-dark);
+}
+
+body .content {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--shrek-grey-light);
+}
+
+/* navbar styles */
+
+.navbarBox {
+    display: flex;
+    justify-Content: space-evenly;
+    width: 100%;
+    height: 150px;
+    border-bottom: 5px solid var(--shrek-brown-dark);
+    background-color: var(--shrek-green-dark);
+}
+
+.navbarBox .subpagesBox {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 80%;
+}
+
+.subpagesBox .subpageBox {
+    width: 30%;
+    border-left: 5px solid var(--shrek-brown-dark);
+    border-right: 5px solid var(--shrek-brown-dark);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+}
+
+.navbarBox .subpageBox:hover, .loginBox:hover, .signupBox:hover {
+    background-color: var(--shrek-green-light);
+    cursor: pointer;
+}
+
+.logoBox, .loginSignupBox {
+    width: 10%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginBox, .signupBox {
+    /* wdith: 100%; nie działa? */
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--shrek-brown-dark);
+    border-radius: 15px;
+}
+
+.loginBox p, .signupBox p {
+    padding: 5px;
+}
