@@ -1,0 +1,19 @@
+function ProfileInfo({ photoPath, username, email }) {
+    return (
+        <div className="profileInfo">
+            <div className="photoBox">
+                <img src={photoPath} alt="🧍"/>
+            </div>
+            <div className="usernameBox">
+                <p>User Name:</p>
+                <p>{username}</p>
+            </div>
+            <div className="emailBox">
+                <p>E-Mail:</p>
+                <p>{email}</p>
+            </div>
+        </div>
+    )
+}
+
+export default ProfileInfo;
