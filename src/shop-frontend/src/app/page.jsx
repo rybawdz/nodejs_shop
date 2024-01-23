@@ -5,6 +5,9 @@ import NavBar from './components/navbar';
 import StoreItem from './components/storeItem';
 import './styles/main.css';
 
+// Czy tylko ja mam glitcha, że jak wracam z login/signup 
+// do głownej strony to wszystko się retarduje? (jak się przeładuje stronę to wraca do normy)
+
 function Home() {
   const router = useRouter();
   return (

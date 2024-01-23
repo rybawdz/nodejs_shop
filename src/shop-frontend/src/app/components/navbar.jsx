@@ -1,9 +1,6 @@
-// Import dependencies
 import { useRouter } from 'next/navigation';
 
-// NavBar component
 function NavBar() {
-    // useRouter hook
     const router = useRouter();
 
     // Subpages data
@@ -38,8 +35,8 @@ function NavBar() {
             <div className='subpagesBox'>
                 {content}
             </div>
-            <div className="loginSignupBox" onClick={handleClick("/login")}>
-                <div className="loginBox">
+            <div className="loginSignupBox">
+                <div className="loginBox" onClick={handleClick("/login")}>
                     <p>
                         Log In
                     </p>
@@ -54,5 +51,4 @@ function NavBar() {
     );
 }
 
-// Export NavBar component
 export default NavBar;
