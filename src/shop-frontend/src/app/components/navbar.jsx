@@ -29,9 +29,6 @@ function NavBar() {
         );
     }
 
-    // Styles for NavBar
-    
-
     // Render NavBar component
     return (
         <div className='navbarBox'>

@@ -15,7 +15,7 @@ function Home() {
     <h1>Hello, home page!</h1>
     </marquee>
     {/* add photo request handling to routing */}
-    <StoreItem photoPath='./img/photo.jpg' itemName="itemName" itemPrice="100"/>
+    <StoreItem photoPath='/img/photo.jpg' itemName="itemName" itemPrice="100"/>
     </div>
     {/* <Button text="log in" action={() => router.push("/login")}/> 
     <Button text="sign up" action={() => router.push("/signup")}/>  */}
