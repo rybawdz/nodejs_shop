@@ -1,19 +1,15 @@
 const User = require("../models/user");
-module.exports = async function login(req, res) {
-    if(!req.body.email || !req.body.password){
-        res.status(400).json({message: 'Not enough information provided.'});
-        return;  
+
+module.exports = async function logout(req, res) {
+    let name;
+
+    // Check if req.session is defined
+    if (!req.session || !req.session.user) {
+        return res.status(404).send();
     }
-    try {
-        const hash = await argon2.hash(req.body.password);
-    } catch (err) {
-        res.status(400).json({message: 'Password hashing error'});
-    }
-    try{
-        const data = await User.find({email: req.body.email, password: hash});
-        res.status(200).json(data);
-    }
-    catch(error){
-        res.status(500).json({message: error.message});
-    }
-}
+
+    // Access the name property only if req.session.user is defined
+    name = req.session.user.name;
+
+    return res.status(200).send({ name });
+};

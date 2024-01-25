@@ -3,16 +3,15 @@ const http = require('http');
 const logger = require('./logger');
 const colors = require('colors')
 const session = require('express-session')
-
+const { v4: uuidv4 } = require('uuid');
 const url = require('url')
 const promBundle = require("express-prom-bundle");
 const mongoose = require("mongoose");
 var app = express();
 const mongoString = "mongodb://euser:changesecret@mongo:27017/ecommerce"
 const database = mongoose.connection;
+const MongoStore = require('connect-mongo');
 
-
-const User = require("./models/user");
 
 function dbconnect() {
   mongoose.connect(mongoString);
@@ -40,6 +39,19 @@ const metricsMiddleware = promBundle({
 app.use(express.json());
 app.set('views', './views');
 app.use(metricsMiddleware);
+app.use(session({
+  name: uuidv4(),
+  secret: 'Replace with your secret key',
+  httpOnly: true,
+  secure: false, // we don't use https
+  maxAge: 1000 * 60 * 60, // 1 hour
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
+      mongoUrl: mongoString
+  })
+}));
+
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const signup = require('./routes/signup');
@@ -49,11 +61,12 @@ const userDelete = require('./routes/userdelete');
 
 
 
+
 app.get('/', (req, res) => { res.send('Hello World'); })
 app.post('/api/v1/user', signup);
 app.post('/api/v1/user/login', login);
-/*app.post('/api/v1/user/logout', logout());
-app.get('/api/v1/user/:id', userInfo());
+app.post('/api/v1/user/logout', logout);
+/*app.get('/api/v1/user/:id', userInfo());
 app.put('/api/v1/user/:id', userUpdate());
 app.delete('/api/v1/user/:id', userDelete());
 */

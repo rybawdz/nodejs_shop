@@ -3,6 +3,7 @@ const User = require("../models/user");
 module.exports = async function login(req, res) {
     if(!req.body.email || !req.body.password){
         res.status(400).json({message: req.body});
+        
         return;  
     }
     var exists = await User.exists({email: req.body.email, password: req.body.password}); 
