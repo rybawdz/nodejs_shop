@@ -12,7 +12,6 @@ const uuid = require('uuid');
 var app = express();
 const mongoString = "mongodb://euser:changesecret@mongo:27017/ecommerce"
 const database = mongoose.connection;
-const MongoStore = require('connect-mongo');
 
 
 function dbconnect() {
@@ -55,7 +54,7 @@ app.use(session({
 }));
 
 const login = require('./routes/login');
-//const logout = require('./routes/logout');
+const logout = require('./routes/logout');
 const signup = require('./routes/signup');
 const userInfo = require('./routes/userinfo');
 const userUpdate = require('./routes/userupdate.js');
