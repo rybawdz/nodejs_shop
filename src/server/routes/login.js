@@ -11,28 +11,27 @@ module.exports = async function login(req, res, next) {
         }
 
         // Hash the password
-        const hash = await argon2.hash(req.body.password);
+
 
         // Find user based on email and hashed password
-        const data = await User.findOne({ email: req.body.email, password: hash });
+        const data = await User.findOne({ email: req.body.email });
 
-        // If user is not found, respond with an error
-        if (!data) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+        if (await argon2.verify(data.password, req.body.password)) {
+            const { name } = req.body;
+            req.session.user = {
+                name,
+                isLoggedIn: true
+            };
+
+            // Save session
+            await req.session.save();
+
+            // Respond with success and user data
+            res.status(200).json(data);
+        } else {
+            return res.status(401).json({ message: 'Invalid credentials: ' + req.body.email + " " + hash });
         }
 
-        // Set session user
-        const { name } = req.body;
-        req.session.user = {
-            name,
-            isLoggedIn: true
-        };
-
-        // Save session
-        await req.session.save();
-
-        // Respond with success and user data
-        res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ message: error });
     }

@@ -3,7 +3,7 @@ const User = require("../models/user");
 module.exports = async function signup(req, res) {
         
     try{
-    var exists = await User.exists({email: req.body.email, password: req.body.password}); 
+    var exists = await User.exists({email: req.body.email}); 
     }catch (err) {
         res.status(400).json({ err: { message: err.message, stack: err.stack } });
         return;
