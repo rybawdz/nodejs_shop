@@ -8,6 +8,7 @@ Client - React/Nextjs, Tailwind CSS
 
 Maybe some logs - graylog
 
-
-TODO:
-- replace secrets (db, prom, grafana credentials, cookie signing secret, create api secret for frontend)
+TODO: 
+- change credentials (mongodb, me, prom, grafana)
+- change secrets (cookie sign, api)
+- change error messages to not show stack trace

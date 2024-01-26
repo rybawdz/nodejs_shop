@@ -4,6 +4,12 @@ const User = require("../models/user");
 module.exports = async function signup(req, res) {
     if (!req.body.email || !req.body.password) {
         res.status(400).json({ message: "Email and password are required." });
+        
+        return;
+    }
+    var exists = await User.exists({email: req.body.email, password: req.body.password}); 
+    if(exists){
+        res.status(400).json({message: 'User already exists.'});
         return;
     }
 

@@ -3,8 +3,11 @@
 import signIn from "../lib/signIn"
 import TextBox from "../components/textbox";
 import Button from "../components/button";
+import SignupForm from "../components/signupForm";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
+import '../styles/main.css'
+import '../styles/loginSignupStyles.css'
 
 async function register(prevState, formData) {
 
@@ -28,8 +31,15 @@ export default function Page() {
   const { pending } = useFormStatus();
   return (
     <div>
-      <h1>Hello, signup page!</h1>
-      <form action={dispatch}>
+      {/* <h1>Hello, signup page!</h1> */}
+      <h1>Sign Up</h1>
+      <SignupForm action={dispatch} />
+      {errorMessage && (
+        <>
+          <p>{errorMessage}</p>
+        </>
+      )}
+      {/* <form action={dispatch}>
         <TextBox placeholder="Enter email" type="email" name="username" /> <br></br>
         <TextBox placeholder="Enter password" type="text" name="password" /> <br></br>
         <TextBox placeholder="Confirm password" type="text" name="confirmpwd" /> <br></br>
@@ -44,7 +54,7 @@ export default function Page() {
             </>
           )}
         </div>
-      </form>
+      </form> */}
     </div>
   );
 }
