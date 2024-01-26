@@ -2,11 +2,9 @@ services:
 
   server:
     build:
-      context: ./dockerfiles
-      dockerfile: 'node.dockerfile'
+      dockerfile: './dockerfiles/node.dockerfile'
     ports:
      - '4040:4040'
-    working_dir: /home/node/app
     networks:
       - front-tier
       - monitoring
