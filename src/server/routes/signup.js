@@ -15,7 +15,7 @@ module.exports = async function signup(req, res) {
     try {
         var hash = await argon2.hash(req.body.password);
     } catch (err) {
-        res.status(400).json({ err: { message: err.message, stack: err.stack } });
+        res.status(500).json({ err: { message: err.message, stack: err.stack } });
         return;
     }
 

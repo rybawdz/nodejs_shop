@@ -424,7 +424,7 @@ paths:
         '400':
           description: Invalid username/password supplied
   /user/logout:
-    post:
+    get:
       tags:
         - user
       summary: Logs out current logged in user session
@@ -432,14 +432,14 @@ paths:
       responses:
         default:
           description: successful operation
-  '/user/{username}':
+  '/user/{userId}':
     get:
       tags:
         - user
       summary: Get user by user name
       operationId: getUserByName
       parameters:
-        - name: username
+        - name: userId
           in: path
           description: The name that needs to be fetched. Use user1 for testing.
           required: true
@@ -466,7 +466,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-        - name: username
+        - name: userId
           in: path
           description: name that need to be updated
           required: true
@@ -491,7 +491,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-        - name: username
+        - name: userId
           in: path
           description: The name that needs to be deleted
           required: true

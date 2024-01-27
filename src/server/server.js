@@ -66,22 +66,20 @@ const userDelete = require('./routes/userdelete');
 app.get('/', (req, res) => { res.send('Hello World'); })
 app.post('/api/v1/user', signup);
 app.post('/api/v1/user/login', login);
-app.post('/api/v1/user/logout', logout);
-/*app.get('/api/v1/user/:id', userInfo());
-app.put('/api/v1/user/:id', userUpdate());
-app.delete('/api/v1/user/:id', userDelete());
-*/
+app.get('/api/v1/user/logout', logout);
+app.get('/api/v1/user/:userId', userInfo);
+app.put('/api/v1/user/:userId', userUpdate);
+app.delete('/api/v1/user/:userId', userDelete);
+
 
 app.use(session({
-  name: (req) => {
-    return uuid()
-  },
+
   secret: 'Replace with your secret key',
   httpOnly: true,
   secure: false, // not using https
   maxAge: 1000 * 60 * 60, // 1 hour
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: MongoStore.create({
       mongoUrl: mongoString
   })
