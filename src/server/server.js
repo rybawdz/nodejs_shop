@@ -63,7 +63,12 @@ const userDelete = require('./routes/userdelete');
 
 
 
-app.get('/', (req, res) => { res.send('Hello World'); })
+app.get('/', (req, res) => {
+  if(req.session.user){
+    res.send('Hello ' + req.session.user);
+    return
+  }
+  res.send('Hello World'); })
 app.post('/api/v1/user', signup);
 app.post('/api/v1/user/login', login);
 app.get('/api/v1/user/logout', logout);
