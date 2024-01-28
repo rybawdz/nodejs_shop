@@ -3,10 +3,11 @@ const argon2 = require("argon2");
 
 
 module.exports = async function userupdate(req, res, next) {
-    try {
+ 
         // Validate request body
         if (!req.body.password) {
-            return res.status(400).json({ message: 'No password provided.' });
+            res.status(400).json({ message: 'No password provided.' });
+            return;
         }
         try {
             var hash = await argon2.hash(req.body.password);
@@ -17,12 +18,11 @@ module.exports = async function userupdate(req, res, next) {
 
         const filter = { _id: req.params.userId };
         const update = { password: hash };
-        let doc = await Character.findOneAndUpdate(filter, update);
-        res.status(200);
+        let doc = await User.findOneAndUpdate(filter, update);
+        res.status(200).json(doc);
+        
 
 
 
-    } catch (error) {
-        res.status(500).json({ message: error });
-    }
+    
 };
