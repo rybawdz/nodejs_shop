@@ -2,7 +2,8 @@ services:
 
   server:
     build:
-      dockerfile: './dockerfiles/node.dockerfile'
+      context: ./dockerfiles
+      dockerfile: 'node.dockerfile'
     ports:
      - '4040:4040'
     working_dir: /home/node/app
@@ -13,10 +14,25 @@ services:
     volumes:
       - ./src/server:/home/node/app
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     command: npm start
     depends_on:
       - mongo
+
+  app:
+    build:
+      context: ./dockerfiles
+      dockerfile: 'app.dockerfile'
+    ports:
+      - '3000:3000'
+    working_dir: /home/frontend
+    networks:
+      - front-tier
+    volumes:
+      - ./src/shop-frontend:/home/frontend
+    depends_on:
+      - server
+    command: npm run dev
 
   mongo:
     image: mongo
@@ -41,6 +57,8 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+
 
 volumes:
   grafana-storage: {}
