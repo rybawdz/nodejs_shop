@@ -10,6 +10,8 @@ const mongoose = require("mongoose");
 const MongoStore = require('connect-mongo');
 const uuid = require('uuid'); 
 var app = express();
+const cors = require('cors')
+
 const mongoString = "mongodb://euser:changesecret@mongo:27017/ecommerce"
 const database = mongoose.connection;
 
@@ -36,7 +38,7 @@ const metricsMiddleware = promBundle({
     }
   }
 });
-
+app.use(cors())
 app.use(express.json());
 app.set('views', './views');
 app.use(metricsMiddleware);

@@ -1,60 +1,42 @@
 "use client";
 
-import signIn from "../lib/signIn"
+import signUp from "../lib/signUp"
 import TextBox from "../components/textbox";
 import Button from "../components/button";
 import SignupForm from "../components/signupForm";
-import React from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import React, { useState, FormEvent } from 'react'
 import '../styles/main.css'
 import '../styles/loginSignupStyles.css'
+import AuthError from "../lib/authError"
 
-async function register(prevState, formData) {
 
-  try {
-    await signIn('credentials', formData);
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'PasswordMatch':
-          return 'Passwords do not match.';
-        default:
-          return 'Something went wrong.';
-      }
-    }
-    throw error;
-  }
-}
 
 export default function Page() {
-  const [errorMessage, dispatch] = useFormState(register, undefined);
-  const { pending } = useFormStatus();
+
+  async function register(event) {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget);
+    try {
+      
+      await signUp(formData);
+    } catch (error) {
+        setError(error.message)
+
+    }
+  }
+
+  const [errorMessage, setError] = useState(null);
+
   return (
     <div>
-      {/* <h1>Hello, signup page!</h1> */}
-      <h1>Sign Up</h1>
-      <SignupForm action={dispatch} />
-      {errorMessage && (
-        <>
-          <p>{errorMessage}</p>
-        </>
-      )}
-      {/* <form action={dispatch}>
-        <TextBox placeholder="Enter email" type="email" name="username" /> <br></br>
-        <TextBox placeholder="Enter password" type="text" name="password" /> <br></br>
-        <TextBox placeholder="Confirm password" type="text" name="confirmpwd" /> <br></br>
-        <Button type="submit" text="Submit" aria-disabled={pending} />
-        <div
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          {errorMessage && (
-            <>
-              <p>{errorMessage}</p>
-            </>
-          )}
-        </div>
-      </form> */}
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+      <form onSubmit={register}>
+        <input type="email" name="email" />
+        <input type="password" name="password" />
+        <input type="password" name="confirmpwd" />
+        <button type="submit" >Submit</button>
+      </form>
     </div>
   );
+
 }

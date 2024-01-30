@@ -1,7 +1,7 @@
-function SignupForm({ action }) {
+function SignupForm({ onSubmit }) {
     return (
         <div className="singupFormBox">
-            <form method="post" action={action}>
+            <form method="post" onSubmit={onSubmit}>
                 <div className="emailBox">
                     <p>e-mail</p>
                     <input type="text" className="email" />
@@ -11,11 +11,11 @@ function SignupForm({ action }) {
                     <input type="text" className="username" />
                 </div>
                 <div className="passwordBox">
-                    <p>Passoword</p>
+                    <p>Password</p>
                     <input type="password" className="password" />
                 </div>
                 <div className="passwordRepeatBox">
-                    <p>Repeat passoword</p>
+                    <p>Repeat password</p>
                     <input type="password" className="passwordRepeat" />
                 </div>
                 <div className="submitBox">

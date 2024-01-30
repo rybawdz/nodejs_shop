@@ -30,7 +30,8 @@ function NavBar() {
     return (
         <div className='navbarBox'>
             <div className='logoBox'>
-                Logo
+            <img src="/logo.png" alt="zesty" />
+
             </div>
             <div className='subpagesBox'>
                 {content}

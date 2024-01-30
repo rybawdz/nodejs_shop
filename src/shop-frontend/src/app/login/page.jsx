@@ -22,9 +22,4 @@ export default function Page() {
       <LoginForm action={dispatch} />
     </div>
   );
-  {/* <h1>Hello, login page!</h1> */ }
-  {/* <form action={dispatch}>
-        <TextBox placeholder="Enter email" type="text" name="username" />
-        <Button type="submit" text="Submit" aria-disabled={pending} />
-      </form> */}
 }

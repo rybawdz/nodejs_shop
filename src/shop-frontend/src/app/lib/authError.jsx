@@ -1,6 +1,8 @@
-class ValidationError extends Error {
-  constructor(type) {
-    super("error");
-    this.type = type; // (2)
+class AuthError extends Error {
+  constructor(message) {
+    super(message);
+    this.message = message; // (2)
   }
 }
+
+export default AuthError;

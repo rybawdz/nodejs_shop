@@ -28,7 +28,7 @@ module.exports = async function signup(req, res) {
         var dataToSave = await data.save();
     }
     catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
         return;
     }
     res.status(200).json(dataToSave);

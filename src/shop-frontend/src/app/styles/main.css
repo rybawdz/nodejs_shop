@@ -59,6 +59,12 @@ body .content {
     cursor: pointer;
 }
 
+
+.logoBox img {
+    height: 100%;
+    width: 100%;
+}
+
 .logoBox, .loginSignupBox {
     width: 10%;
     height: 100%;
