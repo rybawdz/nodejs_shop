@@ -1,13 +1,8 @@
+import AuthError from "../lib/authError"
 async function signIn(formData){
-    try {
-        pwd = formData.get("password");
-        if (pwd != formData.get("confirmpwd")){
-            throw new Error('PasswordMatch');
-        }
-        const url = 'http://localhost:4040/api/v1/user/login';
-        const dataToSend = { email : formData.get("email"), password: pwd };
+        const dataToSend = { email : formData.get("email"), password: formData.get("password") };
 
-        const response = await fetch(url, {
+        const response = await fetch("http://localhost:4040/api/v1/user/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -15,14 +10,17 @@ async function signIn(formData){
             body: JSON.stringify(dataToSend),
         });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
         // Parse the JSON data from the response
-        const data = await response.json();
-        console.log('Response from server:', data);
-    } catch (error) {
-        console.error('Error sending POST request:', error.message);
-    }
+        
+        if (response.status == 400) {
+            const data = await response.json();
+            throw new AuthError(data.message);
+        }
+        if (response.status == 500) {
+            throw new Error('Server-side error');
+        }
+        return response;
+
+;
 }
+export default signIn;

@@ -1,10 +1,9 @@
 "use client";
 
 import signUp from "../lib/signUp"
-import TextBox from "../components/textbox";
-import Button from "../components/button";
+import { useRouter } from 'next/navigation';
 import SignupForm from "../components/signupForm";
-import React, { useState, FormEvent } from 'react'
+import React, { useState } from 'react'
 import '../styles/main.css'
 import '../styles/loginSignupStyles.css'
 import AuthError from "../lib/authError"
@@ -12,15 +11,24 @@ import AuthError from "../lib/authError"
 
 
 export default function Page() {
-
+  const router = useRouter();
   async function register(event) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget);
     try {
       
-      await signUp(formData);
+      const response = await signUp(formData);
+      router.push('/');
+      
+
     } catch (error) {
-        setError(error.message)
+      if(error instanceof AuthError){
+        setError(error.message);
+      }
+      else{
+        throw(error);
+      }
+        
 
     }
   }

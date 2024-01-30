@@ -1,14 +1,12 @@
 const User = require("../models/user");
 
 module.exports = async function userdelete(req, res, next) {
+    if(!req.session.user) {
+        res.status(401);
+    }
     try {
-        // Validate request body
-        if (!req.body.email || !req.body.password) {
-            return res.status(400).json({ message: 'Not enough information provided.' });
-        }
 
-
-        const data = await User.deleteOne({ _id: req.params.userId  });
+        const data = await User.deleteOne({ _id: req.session.user  });
         res.status(200);
 
 

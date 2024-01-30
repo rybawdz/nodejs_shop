@@ -16,7 +16,7 @@ module.exports = async function login(req, res, next) {
         // Find user based on email
         const data = await User.findOne({ email: req.body.email });
         if(data == null){
-            res.status(401).json({ message: 'Invalid credentials'});
+            res.status(400).json({ message: 'Invalid credentials'});
             return;
         }
 
@@ -25,15 +25,16 @@ module.exports = async function login(req, res, next) {
 
             // Save session
             req.session.regenerate(function (err) {
-                if (err) res.status(400).json(err);
+                if (err) res.status(500).json(err);
                 req.session.user = data._id
 
                 req.session.save(function (err) {
-                    if (err) return next(err)
+                    if (err) {
+                        res.status(500).json({ message: 'Server error'})
+                    }
                 })
             
                 // Respond with success and user data
-                
                 res.status(200).send();
             })
 

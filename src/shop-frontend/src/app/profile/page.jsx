@@ -1,3 +1,6 @@
+import profile from '../components/profile';
+
 export default function Page() {
-  return <h1>Hello, profile page!</h1>
+
+  return <Profile />
 }

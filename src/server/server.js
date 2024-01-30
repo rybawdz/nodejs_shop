@@ -74,9 +74,9 @@ app.get('/', (req, res) => {
 app.post('/api/v1/user', signup);
 app.post('/api/v1/user/login', login);
 app.get('/api/v1/user/logout', logout);
-app.get('/api/v1/user/:userId', userInfo);
-app.put('/api/v1/user/:userId', userUpdate);
-app.delete('/api/v1/user/:userId', userDelete);
+app.get('/api/v1/user/info', userInfo);
+app.put('/api/v1/user/update', userUpdate);
+app.delete('/api/v1/user/delete', userDelete);
 
 
 app.use(session({

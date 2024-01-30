@@ -18,12 +18,13 @@ async function signUp(formData){
         // Parse the JSON data from the response
         const data = await response.json();
         if (response.status == 400) {
-            throw new AuthError("aa" + data.message);
+            throw new AuthError(data.message);
         }
         if (response.status == 500) {
             throw new Error('Server-side error');
         }
         console.log('Response from server:', data);
+        return response;
 
 ;
 }

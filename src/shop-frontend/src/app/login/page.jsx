@@ -1,25 +1,49 @@
 "use client";
 
-import TextBox from "../components/textbox";
-import Button from "../components/button";
-import LoginForm from "../components/loginForm";
-import React from "react";
-import { useFormState, useFormStatus } from 'react-dom';
-import '../styles/main.css';
-import '../styles/loginSignupStyles.css';
+import signUp from "../lib/signIn"
+import { useRouter } from 'next/navigation';
+import SignupForm from "../components/signupForm";
+import React, { useState, FormEvent } from 'react'
+import '../styles/main.css'
+import '../styles/loginSignupStyles.css'
+import AuthError from "../lib/authError"
 
-async function handleForm(prevState, formData) {
-  email = formData.get('email');
-  password = formData.get('password')
-}
+
 
 export default function Page() {
-  const [errorMessage, dispatch] = useFormState(handleForm, undefined);
-  const { pending } = useFormStatus();
+  const router = useRouter();
+  async function login(event) {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget);
+    try {
+      
+      const response = await signUp(formData);
+      document.cookie = response.headers.get('Set-Cookie');
+      router.push('/');
+      
+
+    } catch (error) {
+      if(error instanceof AuthError){
+        setError(error.message);
+      }
+      else{
+        throw(error);
+      }
+
+    }
+  }
+
+  const [errorMessage, setError] = useState(null);
+
   return (
     <div>
-      <h1>Log In</h1>
-      <LoginForm action={dispatch} />
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+      <form onSubmit={login}>
+        <input type="email" name="email" />
+        <input type="password" name="password" />
+        <button type="submit" >Submit</button>
+      </form>
     </div>
   );
+
 }
