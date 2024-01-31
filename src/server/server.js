@@ -64,7 +64,10 @@ const signup = require('./routes/signup');
 const userInfo = require('./routes/userinfo');
 const userUpdate = require('./routes/userupdate.js');
 const userDelete = require('./routes/userdelete');
-
+const product = require('./routes/product');
+const productDelete = require('./routes/productdelete');
+const productSearch = require('./routes/productsearch');
+const productUpdate = require('./routes/productupdate');
 
 function isAuthenticated (req, res, next) {
   if (req.session.user) next();
@@ -83,6 +86,13 @@ app.get('/api/v1/user/logout', isAuthenticated, logout);
 app.get('/api/v1/user/info', isAuthenticated, userInfo);
 app.put('/api/v1/user/update', isAuthenticated, userUpdate);
 app.delete('/api/v1/user/delete', isAuthenticated, userDelete);
+
+app.post('/api/v1/product', product);
+app.get('/api/v1/product/search', productSearch);
+app.delete('/api/v1/product/delete', productDelete);
+app.put('/api/v1/product/update', productUpdate);
+
+
 
 
 function start() {
