@@ -425,6 +425,13 @@ paths:
           description: Invalid username/password supplied
   /user/logout:
     get:
+      parameters:
+        - name: userId
+          in: cookie
+          description: The name that needs to be fetched. Use user1 for testing.
+          required: true
+          schema:
+            type: string
       tags:
         - user
       summary: Logs out current logged in user session
@@ -432,7 +439,7 @@ paths:
       responses:
         default:
           description: successful operation
-  '/user/{userId}':
+  /user/info:
     get:
       tags:
         - user
@@ -440,7 +447,7 @@ paths:
       operationId: getUserByName
       parameters:
         - name: userId
-          in: path
+          in: cookie
           description: The name that needs to be fetched. Use user1 for testing.
           required: true
           schema:
@@ -459,6 +466,7 @@ paths:
           description: Invalid username supplied
         '404':
           description: User not found
+  /user/update:
     put:
       tags:
         - user
@@ -467,8 +475,14 @@ paths:
       operationId: updateUser
       parameters:
         - name: userId
-          in: path
+          in: cookie
           description: name that need to be updated
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: new password
           required: true
           schema:
             type: string
@@ -484,6 +498,7 @@ paths:
               $ref: '#/components/schemas/User'
         description: Updated user object
         required: true
+  /user/delete:
     delete:
       tags:
         - user
@@ -492,7 +507,7 @@ paths:
       operationId: deleteUser
       parameters:
         - name: userId
-          in: path
+          in: cookie
           description: The name that needs to be deleted
           required: true
           schema:
