@@ -7,6 +7,8 @@ const url = require('url')
 const promBundle = require("express-prom-bundle");
 const mongoose = require("mongoose");
 const MongoStore = require('connect-mongo');
+const multer = require('multer');
+
 var app = express();
 const cors = require('cors')
 
@@ -25,6 +27,19 @@ function dbconnect() {
   })
 }
 
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); 
+  },
+  filename: (req, file, cb) => {
+    const uniqueFilename = Date.now() + '-' + file.originalname;
+    cb(null, uniqueFilename); // Use the original file name
+  },
+});
+
+const upload = multer({ storage });
+
 const metricsMiddleware = promBundle({
   includeMethod: true,
   includePath: true,
@@ -36,10 +51,12 @@ const metricsMiddleware = promBundle({
     }
   }
 });
+
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true
   }));
+
 app.use(express.json());
 app.set('views', './views');
 app.use(metricsMiddleware);
@@ -57,6 +74,8 @@ app.use(session({
     // Other cookie options can be set here
   }
 }));
+app.use(express.static('uploads'))
+
 
 const login = require('./routes/login');
 const logout = require('./routes/logout');
@@ -86,8 +105,7 @@ app.get('/api/v1/user/logout', isAuthenticated, logout);
 app.get('/api/v1/user/info', isAuthenticated, userInfo);
 app.put('/api/v1/user/update', isAuthenticated, userUpdate);
 app.delete('/api/v1/user/delete', isAuthenticated, userDelete);
-
-app.post('/api/v1/product', product);
+app.post('/api/v1/product', upload.single('image'), product);
 app.get('/api/v1/product/search', productSearch);
 app.delete('/api/v1/product/delete', productDelete);
 app.put('/api/v1/product/update', productUpdate);
