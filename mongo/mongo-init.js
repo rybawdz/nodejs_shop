@@ -18,7 +18,6 @@ db.createCollection('invoices');
 db.createCollection('reviews');
 db.createCollection('receipts');
 db.createCollection('orders');
-db.createCollection('carts');
 
 
 
