@@ -36,7 +36,10 @@ const metricsMiddleware = promBundle({
     }
   }
 });
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+  }));
 app.use(express.json());
 app.set('views', './views');
 app.use(metricsMiddleware);
@@ -48,7 +51,11 @@ app.use(session({
   saveUninitialized: true,
   store: MongoStore.create({
       mongoUrl: mongoString
-  })
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60, // 1 hour
+    // Other cookie options can be set here
+  }
 }));
 
 const login = require('./routes/login');
@@ -89,5 +96,4 @@ module.exports =
 {
   start: start
 };
-
 

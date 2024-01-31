@@ -7,6 +7,7 @@ import React, { useState, FormEvent } from 'react'
 import '../styles/main.css'
 import '../styles/loginSignupStyles.css'
 import AuthError from "../lib/authError"
+import LoginForm from "../components/loginForm";
 
 
 
@@ -19,6 +20,7 @@ export default function Page() {
       
       const response = await signUp(formData);
       document.cookie = response.headers.get('Set-Cookie');
+      console.log(response);
       router.push('/');
       
 
@@ -38,11 +40,7 @@ export default function Page() {
   return (
     <div>
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      <form onSubmit={login}>
-        <input type="email" name="email" />
-        <input type="password" name="password" />
-        <button type="submit" >Submit</button>
-      </form>
+      <LoginForm submit={login}/>
     </div>
   );
 

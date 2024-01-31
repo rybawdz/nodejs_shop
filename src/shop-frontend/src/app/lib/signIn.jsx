@@ -8,6 +8,7 @@ async function signIn(formData){
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(dataToSend),
+            credentials: 'include'
         });
 
         // Parse the JSON data from the response

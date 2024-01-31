@@ -38,12 +38,7 @@ export default function Page() {
   return (
     <div>
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      <form onSubmit={register}>
-        <input type="email" name="email" />
-        <input type="password" name="password" />
-        <input type="password" name="confirmpwd" />
-        <button type="submit" >Submit</button>
-      </form>
+      <SignupForm submit={register}/>
     </div>
   );
 

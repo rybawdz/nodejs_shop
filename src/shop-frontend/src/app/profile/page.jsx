@@ -10,7 +10,6 @@ export default function Page() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Cookie': document.cookie
         },
         credentials: 'include',
       });
@@ -34,12 +33,11 @@ export default function Page() {
     <div>
       {userData && (
         <div>
-          <h1>User Data</h1>
+          <h1>Profile</h1>
           <p>Email: {userData.email}</p>
           {/* Display other user details as needed */}
         </div>
       )}
-      <div>{req.headers.cookie}</div>
     </div>
   );
 }

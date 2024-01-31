@@ -1,14 +1,14 @@
-function LoginForm({ action }) {
+function LoginForm({ submit }) {
     return (
         <div className="loginFormBox">
-            <form method="post" action={action}>
+            <form method="post" onSubmit={submit}>
                 <div className="usernameBox">
-                    <p>Username</p>
-                    <input type="text" className="username" />
+                    <p>Email</p>
+                    <input type="email" className="username" name="email" />
                 </div>
                 <div className="passwordBox">
-                    <p>Passoword</p>
-                    <input type="password" className="password" />
+                    <p>password</p>
+                    <input type="password" className="password" name="password" />
                 </div>
                 <div className="submitBox">
                     <input type="submit" value="Log In" />
