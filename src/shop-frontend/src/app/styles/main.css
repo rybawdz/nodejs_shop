@@ -92,9 +92,8 @@ body .content {
 
 .storeItemBox {
 
-    width: 80%;
-    height: 10em;
-    font-size: 1.5em;
+    width: 30%;
+    font-size: 1.5;
     text-align: center;
     border: 3px solid var(--shrek-brown-light);
     margin: 20px;
@@ -103,12 +102,15 @@ body .content {
     margin-bottom: 20px;
     display: grid;
     grid-template-areas: 
-    'photo photo name name name name'
-    'photo photo desc desc desc desc'
-    'photo photo price price buy buy';
+    'photo photo name  name '
+    'photo photo desc  desc '
+    'photo photo price  buy ';
     background-color: var(--shrek-brown-light);
 }
 
+.storeItemList {
+    display:flex;
+}
 .storeItemBox div {
     display: flex;
     justify-content: center;
@@ -124,8 +126,9 @@ body .content {
 
 .itemPhoto img{
     height: 100%;
-    width: 10%;
+    width: 100%;
     margin: 10px;
+    object-fit: cover;
 }
 
 
@@ -136,7 +139,7 @@ body .content {
 
 .itemDescriptionBox {
     grid-area: desc;
-    border-bottom: 1px dashed var(--shrek-brown-light);
+    border-bottom: 3px dashed var(--shrek-brown-light);
 }
 
 .itemPriceBox {

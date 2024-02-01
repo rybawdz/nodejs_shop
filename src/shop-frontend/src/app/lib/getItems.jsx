@@ -11,8 +11,7 @@ export async function getItems() {
   if (response.status == 500) {
     throw new Error('Server-side error');
   }
-  console.log('Response from server:', data);
-  return response;
+  return data;
 }
 
 export default getItems;

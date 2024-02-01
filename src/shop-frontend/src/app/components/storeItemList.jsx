@@ -1,9 +1,26 @@
-function storeItemList ({ products }){
-    return (
+import StoreItem from "./storeItem";
+
+function storeItemList (items ){
+
+  return (
+    <div div className="storeItemList">
       <div>
-        <h1>All Results</h1>
-      </div>
-    );
+      {items.items.map((item) => (
+        <StoreItem item={item} />
+      ))}
+    </div>
+    </div>);
   };
 
   export default storeItemList;
+  /*
+      return (
+      <div div className="storeItemList">
+        <div>
+        {items.map((item) => (
+          <StoreItem item={item} />
+        ))}
+      </div>
+      </div>
+
+    );*/
