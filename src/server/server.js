@@ -108,7 +108,7 @@ app.delete('/api/v1/user/delete', isAuthenticated, userDelete);
 app.post('/api/v1/product', upload.single('image'), product);
 app.get('/api/v1/product/search', productSearch);
 app.delete('/api/v1/product/delete', productDelete);
-app.put('/api/v1/product/update', productUpdate);
+app.put('/api/v1/product/update', upload.single('image'), productUpdate);
 
 
 
