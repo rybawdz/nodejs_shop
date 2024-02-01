@@ -14,7 +14,7 @@ module.exports = async function product(req, res) {
     }
     const data = new Product({
         name: name,
-        photoUrl: 'localhost:4040/uploads/' + req.file.filename,
+        photoUrl: req.file.filename,
         description: description,
         price: price
     });
