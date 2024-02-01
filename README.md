@@ -27,3 +27,4 @@ Full-stack web application - a simple online shop with basic functionalities.
  - change error messages to not show stack trace
  - add file upload sanitization, consider sanitizning imageUrl as well (path travelsal, extension check, stored xss, command injection)
  - add logging (syslog)
+ - tighten cors restrictions

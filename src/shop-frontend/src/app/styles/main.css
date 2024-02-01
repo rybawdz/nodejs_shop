@@ -104,6 +104,7 @@ body .content {
     display: grid;
     grid-template-areas: 
     'photo photo name name name name'
+    'photo photo desc desc desc desc'
     'photo photo price price buy buy';
     background-color: var(--shrek-brown-light);
 }
@@ -127,9 +128,15 @@ body .content {
     margin: 10px;
 }
 
+
 .itemNameBox {
     grid-area: name;
     border-bottom: 3px dashed var(--shrek-brown-light);
+}
+
+.itemDescriptionBox {
+    grid-area: desc;
+    border-bottom: 1px dashed var(--shrek-brown-light);
 }
 
 .itemPriceBox {
