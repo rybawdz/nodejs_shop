@@ -13,10 +13,9 @@ export default  function Home() {
   "use client"
   const [itemData, setItemData] = useState([]);
   useEffect(() => {
-    console.log('g')
     const urlParams = new URLSearchParams(window.location.search);
-    const q = urlParams.get('q');
-    console.log(q);
+    let q = urlParams.get('q');
+    if(!q) q = '';
     fetch('http://localhost:4040/api/v1/product/search?name=' + q, {cache: "no-store"})
     .then((response) => response.json())
     .then((data) => {
