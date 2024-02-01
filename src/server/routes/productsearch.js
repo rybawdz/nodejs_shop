@@ -7,9 +7,10 @@ module.exports = async function productSearch(req, res) {
         let data;
         if (!searchText) {
             data = await Product.find({});
-            console.log('no query');
+            console.log('b')
         }
         else{
+            console.log('a')
             data = await Product.find({
                 $or: [
                   { name: { $regex: searchText, $options: 'i' } }, 
@@ -18,8 +19,7 @@ module.exports = async function productSearch(req, res) {
               });
         }
 
-        console.log(data);
-        console.log(searchText);
+
         if(data != null){
             res.status(200).json(data);
         }

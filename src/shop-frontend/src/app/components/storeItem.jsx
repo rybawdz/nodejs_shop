@@ -1,9 +1,9 @@
 function StoreItem({ item }) {
     return (
-        <div className="storeItemBox">
+        <div className="storeItemBox" >
             <div className="itemPhoto">
                 {item.photoUrl && (
-                    <img src={'http://localhost:4040/' + item.photoUrl} alt="item photo"/>
+                    <img src={'http://localhost:4040/' + item.photoUrl} alt="item photo" />
                 )}
             </div>
             <div className="itemNameBox">

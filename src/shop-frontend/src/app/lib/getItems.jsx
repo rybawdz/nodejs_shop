@@ -1,5 +1,5 @@
-export async function getItems() {
-  const url = 'http://localhost:4040/api/v1/product/search?name=';
+export async function getItems(query) {
+  const url = 'http://localhost:4040/api/v1/product/search?name=' + query;
 
   const response = await fetch(url, {
     method: 'GET',

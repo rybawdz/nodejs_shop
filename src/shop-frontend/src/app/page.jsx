@@ -1,30 +1,40 @@
+"use client"
+import ListProd from './components/ListProd';
 import NavBar from './components/navbar';
 import StoreItem from './components/storeItem';
 import StoreItemList from './components/storeItemList';
 import getItems from './lib/getItems';
+import { useState, ChangeEvent, useEffect } from "react";
 import './styles/main.css';
 
-// Czy tylko ja mam glitcha, że jak wracam z login/signup 
-// do głownej strony to wszystko się retarduje? (jak się przeładuje stronę to wraca do normy)
-// Ja tez tak mam :/ nwm czemu tak jest
 
-export default async function Home() {
-  const items = await getItems()
+
+export default  function Home() {
+  "use client"
+  const [itemData, setItemData] = useState([]);
+  useEffect(() => {
+    console.log('g')
+    const urlParams = new URLSearchParams(window.location.search);
+    const q = urlParams.get('q');
+    console.log(q);
+    fetch('http://localhost:4040/api/v1/product/search?name=' + q, {cache: "no-store"})
+    .then((response) => response.json())
+    .then((data) => {
+      setItemData(data);
+    })
+  },[window.location.search])
   return (
     <div>
       <NavBar />
       <div className='content'>
         <marquee>
-          { }
           <h1>Hello, home page!</h1>
-        </marquee>
-        {/* add photo request handling to routing */}
-        <StoreItemList items={items} />
+          </marquee>
+          <ListProd/>
+          <StoreItemList items={itemData} />
+        
       </div>
     </div>
   );
 }
-
-
-
-
+//<StoreItemList items={itemData} />

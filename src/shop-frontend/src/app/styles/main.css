@@ -87,12 +87,36 @@ body .content {
     padding: 5px;
 }
 
+/* searchInput styles*/
 
+.searchInput {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    padding: 1px;
+    border-radius: 15px;
+    border: 2px solid var(--shrek-brown-light);
+
+
+}
+
+.textSearch{
+    background-color: white;
+    outline: none;
+    border: none;
+    width: 100%;
+    padding-top: 3px;
+    padding-left: 2px;
+    padding-right: 3px;
+    
+}
 /* storeItem styles */
 
 .storeItemBox {
 
-    width: 30%;
+    width: 40%;
     font-size: 1.5;
     text-align: center;
     border: 3px solid var(--shrek-brown-light);
