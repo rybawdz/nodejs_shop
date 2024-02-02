@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { useState, ChangeEvent } from "react";
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 function ListProd() {
     const router = useRouter()
