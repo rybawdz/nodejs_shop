@@ -1,24 +1,24 @@
-function StoreItem({ photoPath, itemName, itemPrice, itemDescription }) {
+function StoreItem({ item }) {
     return (
-        <div className="storeItemBox">
+        <div className="storeItemBox" >
             <div className="itemPhoto">
-                {photoPath && (
-                    <img src={'localhost:4040' + photoPath} alt="item photo"/>
+                {item.photoUrl && (
+                    <img src={'http://localhost:4040/' + item.photoUrl} alt="item photo" />
                 )}
             </div>
             <div className="itemNameBox">
-                {itemName && (
-                    <p>{itemName}</p>
+                {item.name && (
+                    <p>{item.name}</p>
                 )}
             </div>
             <div className="itemPriceBox">
-                {itemPrice && (
-                    <p>{itemPrice} PLN</p>
+                {item.price && (
+                    <p>{item.price} PLN</p>
                 )}
             </div>
             <div className="itemDescriptionBox">
-                {itemDescription && (
-                    <p>{itemDescription}</p>
+                {item.description && (
+                    <p>{item.description}</p>
                 )}
             </div>
             <div className="buyBasketBox">

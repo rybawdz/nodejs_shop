@@ -1,6 +1,8 @@
+"use client"
 import { useRouter } from 'next/navigation';
 
 function NavBar() {
+    
     const router = useRouter();
 
     // Subpages data

@@ -4,17 +4,22 @@ module.exports = async function productSearch(req, res) {
 
     try {
         const searchText = req.query.name;
+        let data;
         if (!searchText) {
-            return res.status(400).json({ error: 'Missing search query' });
+            data = await Product.find({});
+            console.log('b')
         }
-        const data = await Product.find({
-            $or: [
-              { name: { $regex: searchText, $options: 'i' } }, 
-              { description: { $regex: searchText, $options: 'i' } }, 
-            ],
-          });
-          console.log(data);
-          console.log(searchText);
+        else{
+            console.log('a')
+            data = await Product.find({
+                $or: [
+                  { name: { $regex: searchText, $options: 'i' } }, 
+                  { description: { $regex: searchText, $options: 'i' } }, 
+                ],
+              });
+        }
+
+
         if(data != null){
             res.status(200).json(data);
         }
