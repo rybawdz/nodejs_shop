@@ -1,4 +1,14 @@
+import { useRouter } from 'next/navigation';
+
 function StoreItem({ item }) {
+    
+    const router = useRouter();
+
+    const handleClick = (name) => (e) => {
+        e.preventDefault();
+        router.push('/buy?item=' + name);
+    };
+    
     return (
         <div className="storeItemBox" >
             <div className="itemPhoto">
@@ -22,9 +32,15 @@ function StoreItem({ item }) {
                 )}
             </div>
             <div className="buyBasketBox">
-                <button>
-                    Buy
-                </button>
+                {item.name ? (
+                    <button onClick={handleClick(item.name)}>
+                        Buy
+                    </button>
+                ) : (
+                    <button>
+                        Buy
+                    </button>
+                )}
                 <button>
                     🛒
                 </button>
