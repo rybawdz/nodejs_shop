@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ItemSummary from "../components/itemSummary";
 import '../styles/main.css';
 import { useRouter } from "next/navigation";
+import ValidationError from "../lib/validationError";
+import BuyItemForm from "../components/buyItemForm";
+import addOrder from "../lib/addOrder";
 
 export default function Page() {
   const [itemData, setItemData] = useState([]);
@@ -18,35 +20,44 @@ export default function Page() {
   }, []);
 
   const router = useRouter();
+
   async function placeOrder(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    const item = itemData[0] == undefined ? null : itemData[0];
 
     try {
-      const response = await addOrder(formData);
+      const response = await addOrder(item, formData);
       router.push('/')
     } catch (error) {
-      throw(error);
+      if(error instanceof ValidationError){
+        setError(error.message);
+      }
+      else{
+        throw(error);
+      }
     }
   }
 
   const [errorMessage, setError] = useState(null);
 
+  var result = "";
+  if(itemData[0] != undefined) {
+    result = <BuyItemForm submit={placeOrder} 
+                          photoPath={"../" + itemData[0].photoUrl}
+                          itemName={itemData[0].name}
+                          itemPrice={itemData[0].price}
+                          itemDescription={itemData[0].description}/>
+  }
+  else
+  {
+    result = <h1>Invalid item name</h1>
+  }
+
   return (
     <div className="content">
-      <form method="post" onSubmit={placeOrder}>
-        {itemData[0] != undefined &&
-          <ItemSummary photoPath={"../" + itemData[0].photoUrl} 
-          itemName={itemData[0].name} itemPrice={itemData[0].price}
-          itemDescription={itemData[0].description} />
-        } 
-        <p>Quantity</p>
-        <input type="number" className="quantity"/>
-        <p>Address</p>
-        <input type="text" className="address"/>
-        <input type="submit" value="Place Order"/>
-        {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      </form>
+      {result}
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
     </div>
   );
 }
