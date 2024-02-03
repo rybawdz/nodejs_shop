@@ -36,6 +36,7 @@ async function addOrder(item, formData){
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify(dataToSend),
         });
 
