@@ -18,18 +18,6 @@ module.exports = async function addOrder(req, res) {
       date: new Date()
     });
 
-    // cos to populate nie działa :C
-    // try {
-    //     var populatedOrder = await Order.populate(order, [
-    //                                     { path: 'items.product', model: 'Product', select: 'name price' },
-    //                                     { path: 'user', model: 'User' }
-    //     ]);                                
-    // }
-    // catch (error) {
-    //     res.status(500).json({message: 'Could not populate data'});
-    //     return;
-    // }
-
     try {
         var dataToSave = await order.save();
     }
