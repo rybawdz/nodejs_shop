@@ -18,7 +18,8 @@ async function addOrder(item, formData){
             throw new ValidationError("Address is required");
         }
 
-        const url = 'http://lcoalhost:4040/api/v1/user/buy';
+        const url = 'http://localhost:4040/api/v1/buy';
+        
         const dataToSend = {
             items: [
                 {

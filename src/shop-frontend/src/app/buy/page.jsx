@@ -12,6 +12,8 @@ export default function Page() {
   const item = new URLSearchParams(window.location.search);
 
   useEffect(() => {
+    //mam wrażenie, że jakoś podejrzanie dużo tych
+    // fetchy się wykonuje ale może tak ma być
     fetch('http://localhost:4040/api/v1/product/search?name=' + item.get("item"), { cache: "no-store" })
       .then((response) => response.json())
       .then((data) => {
@@ -42,6 +44,7 @@ export default function Page() {
   const [errorMessage, setError] = useState(null);
 
   var result = "";
+  console.log(itemData[0]);
   if(itemData[0] != undefined) {
     result = <BuyItemForm submit={placeOrder} 
                           photoPath={"../" + itemData[0].photoUrl}
