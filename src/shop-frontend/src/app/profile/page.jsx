@@ -1,9 +1,11 @@
 "use client"
 import { useState, useEffect } from 'react';
+import Basket from '../components/orderItemsBasket';
 
 export default function Page() {
   const [userData, setUserData] = useState(null);
   const [userOrders, setUserOrders] = useState(null);
+  const [userBasket, setUserBasket] = useState(null);
 
   async function getUserData(url, setFunction) {
     try {
@@ -30,6 +32,7 @@ export default function Page() {
   useEffect(() => {
     getUserData('http://localhost:4040/api/v1/user/info', setUserData);
     getUserData('http://localhost:4040/api/v1/user/orders', setUserOrders);
+    getUserData('http://localhost:4040/api/v1/user/basket', setUserBasket);
 
   }, []); // Run once on component mount
 
@@ -48,8 +51,11 @@ export default function Page() {
           ))}
         </div>
         ));
+  }
 
-    console.log(orders);
+  var basket = null;
+  if(userBasket){
+    basket = Basket(userBasket.items);
   }
     
   return (
@@ -60,7 +66,15 @@ export default function Page() {
           <p>Email: {userData.email}</p>
           {/* Display other user details as needed */}
           {orders && 
-            orders}
+            <>
+              <h1>Orders</h1>
+              {orders}
+            </>}
+          {basket &&
+            <>
+              <h1>Basket</h1>
+              {basket}
+            </>}
         </div>
       )}
     </div>
