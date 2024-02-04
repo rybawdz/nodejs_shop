@@ -1,10 +1,10 @@
 import BasketItem from "./basketItem"
 
-function Basket(items) {
+function Basket({items, submit}) {
     if(items){
         var price = 0;
         var content = (
-            <form method="POST" className="basketForm">
+            <form method="POST" className="basketForm" onSubmit={submit}>
                 {items.map((item) => {
                     price = price + parseInt(item.quantity) * parseInt(item.product.price);
                     return (
@@ -18,7 +18,7 @@ function Basket(items) {
                 })}
                 <p>Total Price: {price}</p>
                 <p>Address:</p>
-                <input type="text" className="address" /><br />
+                <input type="text" name="address" className="address" /><br />
                 <p>Total: {price}</p>
                 <input type="submit" value="Buy" />
             </form>

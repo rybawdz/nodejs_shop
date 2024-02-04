@@ -1,11 +1,14 @@
 "use client"
 import { useState, useEffect } from 'react';
 import Basket from '../components/orderItemsBasket';
+import addOrder from '../lib/addOrder';
+import ValidationError from '../lib/validationError';
 
 export default function Page() {
   const [userData, setUserData] = useState(null);
   const [userOrders, setUserOrders] = useState(null);
   const [userBasket, setUserBasket] = useState(null);
+  const [errorMessage, setError] = useState(null);
 
   async function getUserData(url, setFunction) {
     try {
@@ -25,6 +28,27 @@ export default function Page() {
       }
     } catch (error) {
       console.error('Error fetching user data:', error.message);
+    }
+  }
+
+async function buyFromBasket(event) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    if(userBasket) {
+      try {
+        const response = await addOrder(userBasket.items, formData)
+        if(response.ok){
+          // request clearing basket
+          location.reload();
+        }
+      } catch (error) {
+        if(error instanceof ValidationError){
+          setError(error.message);
+        }
+        else{
+          throw(error);
+        }
+      }
     }
   }
   
@@ -55,7 +79,7 @@ export default function Page() {
 
   var basket = null;
   if(userBasket){
-    basket = Basket(userBasket.items);
+    basket = <Basket items={userBasket.items} submit={buyFromBasket}/>;
   }
     
   return (
@@ -74,6 +98,7 @@ export default function Page() {
             <>
               <h1>Basket</h1>
               {basket}
+              {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
             </>}
         </div>
       )}
