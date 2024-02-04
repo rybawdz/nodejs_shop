@@ -1,10 +1,11 @@
 import { useRouter } from 'next/navigation';
+import handleBasketClick from '../lib/handleBasketClick';
 
 function StoreItem({ item }) {
     
     const router = useRouter();
 
-    const handleClick = (name) => (e) => {
+    const handleBuyClick = (name) => (e) => {
         e.preventDefault();
         router.push('/buy?item=' + name);
     };
@@ -33,7 +34,7 @@ function StoreItem({ item }) {
             </div>
             <div className="buyBasketBox">
                 {item.name ? (
-                    <button onClick={handleClick(item.name)}>
+                    <button onClick={handleBuyClick(item.name)}>
                         Buy
                     </button>
                 ) : (
@@ -41,9 +42,15 @@ function StoreItem({ item }) {
                         Buy
                     </button>
                 )}
-                <button>
+                {item.name ? (
+                    <button onClick={handleBasketClick(item.name)}>
                     🛒
-                </button>
+                    </button>
+                ) : (
+                    <button>
+                        🛒
+                    </button>
+                )}
             </div>
         </div>
     )
