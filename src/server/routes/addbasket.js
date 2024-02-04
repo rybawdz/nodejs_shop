@@ -9,10 +9,6 @@ module.exports = async function addBasket(req, res) {
         const user = await User.findOne({ _id: req.session.user  });
         const itemName = req.body.itemName; 
         const product = await Product.findOne({ name: itemName });
-        console.log("Handling user: ");
-        console.log(user);
-        console.log("Product " + itemName + ": ");
-        console.log(product);
         if(user && product) {
             var cart = await Cart.findOne({user: user._id});
             

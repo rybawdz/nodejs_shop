@@ -39,6 +39,10 @@ async function buyFromBasket(event) {
         const response = await addOrder(userBasket.items, formData)
         if(response.ok){
           // request clearing basket
+          fetch('http://localhost:4040/api/v1/user/clearbasket', {
+            method: 'GET',
+            credentials: 'include',
+          });
           location.reload();
         }
       } catch (error) {

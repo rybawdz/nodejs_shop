@@ -91,6 +91,7 @@ const addOrder = require('./routes/addorder.js');
 const userOrders = require('./routes/userorders.js');
 const addBasket = require('./routes/addbasket.js');
 const Basket = require('./routes/basket.js')
+const clearBasket = require('./routes/clearbasket.js');
 
 function isAuthenticated (req, res, next) {
   if (req.session.user) 
@@ -120,6 +121,7 @@ app.post('/api/v1/buy', isAuthenticated, addOrder);
 app.get('/api/v1/user/orders', isAuthenticated, userOrders);
 app.post('/api/v1/product/basket', isAuthenticated, addBasket);
 app.get('/api/v1/user/basket', isAuthenticated, Basket);
+app.get('/api/v1/user/clearbasket', isAuthenticated, clearBasket);
 
 
 
