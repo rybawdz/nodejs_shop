@@ -6,10 +6,10 @@ function BuyItemForm({submit, photoPath, itemName, itemPrice, itemDescription}) 
           <ItemSummary photoPath={photoPath} 
           itemName={itemName} itemPrice={itemPrice}
           itemDescription={itemDescription} />
-        <p>Quantity</p>
+        <h3>Quantity</h3>
         <input type="number" name="quantity" className="quantity"/>
-        <p>Address</p>
-        <input type="text" name="address" className="address"/>
+        <h3>Address</h3>
+        <input type="text" name="address" className="address"/><br/>
         <input type="submit" value="Place Order"/>
       </form>
     )

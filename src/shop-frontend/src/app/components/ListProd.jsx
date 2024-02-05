@@ -27,7 +27,7 @@ function ListProd() {
     return (
 
         <div className="searchInput">
-            <label htmlFor="inputId">searchIcon</label>
+            <label htmlFor="inputId">🔍</label>
             <input type="text"
                 id="inputId"
                 placeholder="Enter your keywords"

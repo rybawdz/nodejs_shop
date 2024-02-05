@@ -19,6 +19,7 @@ body .content {
     margin-right: auto;
     background-color: var(--shrek-grey-light);
     text-align: center;
+    padding: 1px;
 }
 
 /* navbar styles */
@@ -96,9 +97,11 @@ body .content {
     flex-direction: row;
     align-items: center;
     gap: 5px;
-    padding: 1px;
+    padding: 10px;
     border-radius: 15px;
     border: 2px solid var(--shrek-brown-light);
+    margin-left: auto;
+    margin-right: auto;
 
 
 }

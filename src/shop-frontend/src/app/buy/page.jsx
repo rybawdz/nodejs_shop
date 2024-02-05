@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import ValidationError from "../lib/validationError";
 import BuyItemForm from "../components/buyItemForm";
 import addOrder from "../lib/addOrder";
+import '../styles/profileStyles.css'
+import NavBar from "../components/navbar";
 
 export default function Page() {
   const [itemData, setItemData] = useState([]);
@@ -58,9 +60,12 @@ export default function Page() {
   }
 
   return (
+    <>
+    <NavBar/>
     <div className="content">
       {result}
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
     </div>
+    </>
   );
 }
