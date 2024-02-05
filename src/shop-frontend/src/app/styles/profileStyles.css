@@ -54,7 +54,16 @@
     margin-right: auto;
 }
 
-.orderTileTitle {
+.orderAdminTile, .userAdminTile, .basketAdminTile {
+    border: 3px solid var(--shrek-brown-light);
+    border-radius: 5px;
+    margin: 10px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.orderTileTitle, .userTitleTile {
     background-color: var(--shrek-grey-dark);
     border-bottom: 3px solid var(--shrek-brown-dark);
     padding: 1px;
@@ -80,7 +89,7 @@
     border-bottom: 3px solid var(--shrek-brown-light);  
 }
 
-input {
+input, button {
     font-size: 1.5em;
     margin: 10px;
     padding: 10px;
@@ -92,6 +101,8 @@ input {
 }
 
 input[type="text"]:focus,
+input[type="password"]:focus,
 input[type="submit"]:hover {
     background-color: var(--shrek-green-light);
 }
+
