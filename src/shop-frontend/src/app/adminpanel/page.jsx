@@ -1,71 +1,42 @@
 "use client"
-import { useForm, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ProductPanel from '../components/productPanel'
+import processForm from '../lib/processForm';
+import getUserData from '../lib/getUserData';
+
 export default function Page() {
+  const [userOrders, setUserOrders] = useState(null);
 
-  async function processForm(event) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget);
-    const action = formData.get('action');
+  useEffect(() => {
+    getUserData('http://localhost:4040/api/v1/admin/orders', setUserOrders);
+  }, [])
 
-    const fileInput = event.currentTarget.querySelector('input[type="file"]');
-    const file = fileInput.files[0];
+  var orders = null;
+  if(userOrders){ 
+    console.log(userOrders);
+    orders = userOrders.map( (order) => (
+        <div key={order._id}>
+          <p>UserID: {order.user._id}</p>
+          <p>Email: {order.user.email}</p>
+          <p>Date: {order.date}</p>
+          <p>Address: {order.address}</p>
+          {order.items.map( (item) => (
+            <div key={  item._id}>
+              <p>Product: {item.product.name}</p>
+              <p>Quantity: {item.quantity}</p>
+              <p>Price: {item.product.price}</p>
+            </div>
+          ))}
+        </div>
+        ));
+  }
 
-
-
-    if (action == 'add') {
-      const formDataForServer = new FormData();
-      formDataForServer.append('name', formData.get('name'));
-      formDataForServer.append('description', formData.get('description'));
-      formDataForServer.append('price', formData.get('price'));
-      formDataForServer.append('image', file);
-
-      const response = await fetch('http://localhost:4040/api/v1/product', {
-        method: 'POST',
-        body: formDataForServer,
-      });
-      if (response.ok) {
-        console.log('Product added successfully');
-      } else {
-        console.error('Error adding product:', response.status);
-      }
-    }
-    else if (action == 'delete') {
-        const dataToSend = { name: formData.get('name') };
-        const response = await fetch("http://localhost:4040/api/v1/product/delete", {
-          method: 'DELETE',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(dataToSend),
-          credentials: 'include'
-        });
-
-        if (response.ok) {
-          console.log('Product added successfully');
-        } else {
-          console.error('Error adding product:', response.status);
-        }
-
-    }
-    else {
-      const formDataForServer = new FormData();
-      formDataForServer.append('name', formData.get('name'));
-      formDataForServer.append('description', formData.get('description'));
-      formDataForServer.append('price', formData.get('price'));
-      formDataForServer.append('image', file);
-
-      const response = await fetch('http://localhost:4040/api/v1/product/update', {
-        method: 'PUT',
-        body: formDataForServer,
-      });
-      if (response.ok) {
-        console.log('Product added successfully');
-      } else {
-        console.error('Error adding product:', response.status);
-      }
-    }
-  };
-
-  return (<ProductPanel submit={processForm} />);
+  return (
+  <>
+    <ProductPanel submit={processForm} />
+    <h1>Orders</h1>
+    {orders && 
+      orders}
+  </>
+  );
 }

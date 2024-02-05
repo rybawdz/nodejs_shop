@@ -3,33 +3,13 @@ import { useState, useEffect } from 'react';
 import Basket from '../components/orderItemsBasket';
 import addOrder from '../lib/addOrder';
 import ValidationError from '../lib/validationError';
+import getUserData from '../lib/getUserData';
 
 export default function Page() {
   const [userData, setUserData] = useState(null);
   const [userOrders, setUserOrders] = useState(null);
   const [userBasket, setUserBasket] = useState(null);
   const [errorMessage, setError] = useState(null);
-
-  async function getUserData(url, setFunction) {
-    try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setFunction(data);
-      } else {
-        console.error('Error fetching user data:', response.status);
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error.message);
-    }
-  }
 
 async function buyFromBasket(event) {
     event.preventDefault();
