@@ -48,7 +48,6 @@ export default function Page() {
 
   var baskets = null;
   if(userBaskets){
-    console.log(userBaskets);
     baskets = userBaskets.map( (basket) => (
         <div key={basket._id}>
           <p>UserID: {basket.user._id}</p>

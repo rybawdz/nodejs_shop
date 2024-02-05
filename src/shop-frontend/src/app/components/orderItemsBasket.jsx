@@ -16,10 +16,9 @@ function Basket({items, submit}) {
                         />
                     );
                 })}
-                <p>Total Price: {price}</p>
                 <p>Address:</p>
                 <input type="text" name="address" className="address" /><br />
-                <p>Total: {price}</p>
+                <p>Total price: {price}</p>
                 <input type="submit" value="Buy" />
             </form>
         );

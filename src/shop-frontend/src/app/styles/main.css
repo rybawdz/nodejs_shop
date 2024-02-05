@@ -18,6 +18,7 @@ body .content {
     margin-left: auto;
     margin-right: auto;
     background-color: var(--shrek-grey-light);
+    text-align: center;
 }
 
 /* navbar styles */

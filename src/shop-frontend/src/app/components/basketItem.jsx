@@ -1,9 +1,9 @@
 function BasketItem({key, name, price, quantity}) {
     return (
-        <div key={key}>
-            <p>Item Name: {name}</p>
-            <p>Item price: {price}</p>
-            <p>Quantity: {quantity}</p>
+        <div key={key} className="basketItem">
+            <p><label className="metaText">Item: </label> {name}</p>
+            <p><label className="metaText">Price: </label>{price}</p>
+            <p><label className="metaText">Quantity: </label>{quantity}</p>
         </div>
     )
 }
