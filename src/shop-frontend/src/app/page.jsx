@@ -26,9 +26,6 @@ export default  function Home() {
     <div>
       <NavBar />
       <div className='content'>
-        <marquee>
-          <h1>Hello, home page!</h1>
-          </marquee>
           <ListProd/>
           <StoreItemList items={itemData} />
         

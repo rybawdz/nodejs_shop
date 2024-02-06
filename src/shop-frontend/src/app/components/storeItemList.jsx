@@ -3,7 +3,7 @@ import StoreItem from "./storeItem";
 function storeItemList(items) {
 
   return (
-    <div>
+    <div className="itemList">
         {items.items.map((item) => (
           <div key={item._id}>
             <StoreItem item={item} />

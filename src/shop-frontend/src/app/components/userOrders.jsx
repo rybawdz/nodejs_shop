@@ -1,11 +1,12 @@
 function UserOrders({orders}) {
-
+    console.log(orders);
     return (
         <div>
             {orders.map((order) => (
                 <div key={order._id} className='orderTile'>
                 <div className='orderTileTitle'>
-                <p><label className='metaText'>Date: </label>{order.date}</p>
+                <p><label className='metaText'>Date: </label>
+                {order.date.substring(0,10) + " " + order.date.substring(11,20)}</p>
                 <p><label className='metaText'>Address: </label>{order.address}</p>
                 </div>
                 <div className='orderTileProducts'>

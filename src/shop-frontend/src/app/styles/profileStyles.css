@@ -70,8 +70,12 @@
 }
 
 .orderTileProducts {
-    /* overflow-y: scroll; */
-    height: 90%;
+    overflow-y: scroll;
+    height: 55%;
+}
+
+.orderTileProducts > div {
+    border-bottom: 3px dashed var(--shrek-brown-light);
 }
 
 .basketBox {
