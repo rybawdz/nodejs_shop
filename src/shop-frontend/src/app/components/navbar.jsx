@@ -1,6 +1,6 @@
 "use client"
 import { useRouter } from 'next/navigation';
-
+import logout from '../lib/logOut'
 function NavBar() {
     
     const router = useRouter();
@@ -28,6 +28,14 @@ function NavBar() {
         );
     }
 
+    const handleLogout = (href) => (e) => {
+        logout();
+        e.preventDefault();
+        router.push(href);
+    };
+
+
+
     // Render NavBar component
     return (
         <div className='navbarBox'>
@@ -47,6 +55,11 @@ function NavBar() {
                 <div className="signupBox" onClick={handleClick("/signup")}>
                     <p>
                         Sign Up
+                    </p>
+                </div>
+                <div className="loginBox" onClick={handleLogout("/")}>
+                    <p>
+                        Log Out
                     </p>
                 </div>
             </div>
