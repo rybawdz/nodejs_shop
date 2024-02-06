@@ -6,6 +6,7 @@ module.exports = async function productDelete(req, res, next) {
     /*if(!req.session.role == 'admin') {
         res.status(401);
     }*/
+    console.log(req.body);
     try {
         if (!req.body.name) {
             res.status(400).json({ message: 'No name provided.' });
@@ -15,6 +16,7 @@ module.exports = async function productDelete(req, res, next) {
         res.status(200);
         if(doc){
             const oldImagePath = path.join(__dirname, '..', 'uploads', product.photoUrl);
+            console.log(oldImagePath);
             await fs.unlink(oldImagePath);
         }
 

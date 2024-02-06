@@ -1,6 +1,6 @@
 "use client"
 import { useRouter } from "next/navigation";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 // import { useParams } from 'react-router-dom';
 
 //zakomentowałem tego imorta bo my wywalało błąd
