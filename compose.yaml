@@ -58,7 +58,34 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
+  grafana:
+    image: grafana/grafana-enterprise
+    depends_on:
+      - prometheus
+    ports: 
+      - 3030:3000
+    networks:
+      - monitoring
+      - front-tier
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    restart: always
 
+  prometheus:
+    image: bitnami/prometheus
+    ports: 
+      - 9090:9090
+    volumes:
+      - prometheus-storage:/prometheus
+      - ./prometheus/prometheus.yaml:/prometheus.yaml
+    networks:
+      - monitoring
+    command: 
+      - '--config.file=/prometheus.yaml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
 
 volumes:
   grafana-storage: {}

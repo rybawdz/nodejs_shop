@@ -18,6 +18,7 @@ export default  function Home() {
   const router = useRouter()
   useEffect(() => {
     let q = searchParams.get('q');
+    if (q == undefined) q = ''
     console.log(q);
     fetch('http://localhost:4040/api/v1/product/search?name=' + q, {cache: "no-store"})
     .then((response) => response.json())
