@@ -192,3 +192,7 @@ body .content {
 .buyBasketBox button:hover {
     background-color: var(--shrek-green-light);
 }
+
+.removeButton:hover {
+    background-color: #E05050;
+}

@@ -12,20 +12,18 @@ async function addOrder(item, formData){
         
         if(Array.isArray(item)) {
             // assuming the order is requested from basket
-            // (quantity is read from item json - should be changed
-            // to form input in the future)
-            var items = item.map( (i) => ({
+            var items = item.map( (i,index) => ({
                 itemId: i.product._id,
                 itemName: i.product.name,
-                quantity: i.quantity,
+                quantity: formData.get("input" + index),
             }))
         }
         else {
             // assuming the order is requested from /buy
             // (quantity is read from form)
-            const qunatity = formData.get("quantity");
-            if(parseInt(qunatity).toString() != qunatity && 
-            parseInt(qunatity) > 0){
+            const quantity = formData.get("quantity");
+            if(parseInt(quantity).toString() != quantity && 
+            parseInt(quantity) > 0){
                 throw new ValidationError("Invalid quantity value");
             }
 
@@ -33,10 +31,11 @@ async function addOrder(item, formData){
                             {
                                 itemId: item._id,
                                 itemName: item.name,
-                                quantity: qunatity,
+                                quantity: quantity,
                             }
                      ]
         }
+
 
         const url = 'http://localhost:4040/api/v1/buy';
         

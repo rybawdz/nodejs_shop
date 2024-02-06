@@ -5,14 +5,14 @@ function Basket({items, submit}) {
         var price = 0;
         var content = (
             <form method="POST" className="basketForm" onSubmit={submit}>
-                {items.map((item) => {
+                {items.map((item, index) => {
                     price = price + parseInt(item.quantity) * parseInt(item.product.price);
                     return (
                         <BasketItem
                             key={item.product.name}
                             name={item.product.name}
                             price={item.product.price}
-                            quantity={item.quantity}
+                            id={"input" + index}
                         />
                     );
                 })}
